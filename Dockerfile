@@ -116,4 +116,4 @@ RUN sudo apt install -y \
 
 COPY --from=builder --chown=root:root /usr/local/include/Siv3D/ /usr/local/include/Siv3D/
 COPY --from=builder --chown=root:root /usr/local/lib/libSiv3D.a /usr/local/lib/libSiv3D.a
-COPY --from=builder --chown=root:root /usr/local/lib/cmake/Siv3D/Siv3DConfig.cmake /usr/local/lib/cmake/Siv3D/Siv3DConfig.cmake
+COPY --from=builder --chown=root:root /usr/local/lib/cmake/Siv3D/ /usr/local/lib/cmake/Siv3D/
