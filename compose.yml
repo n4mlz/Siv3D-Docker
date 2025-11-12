@@ -1,6 +1,7 @@
 services:
   app:
     build: .
+    container_name: siv3d-app
     stdin_open: true
     tty: true
     user: user
