@@ -5,10 +5,9 @@ services:
     tty: true
     user: user
     volumes:
-      - ./src:/home/user/src
+      - ./ExampleProject:/home/user/ExampleProject
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
     environment:
       - DISPLAY=$DISPLAY
       - XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR
       - PULSE_SERVER=$PULSE_SERVER
-
