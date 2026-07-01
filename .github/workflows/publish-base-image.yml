@@ -34,7 +34,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ghcr.io/n4mlz/siv3d-docker-base
+          images: ghcr.io/xlair-dev/siv3d-docker-base
           tags: |
             type=raw,value=latest
             type=sha

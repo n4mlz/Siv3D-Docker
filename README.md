@@ -7,7 +7,7 @@
 - Siv3D 本体のビルドとインストール
 - Linux 用の開発依存パッケージの管理
 - `ccache` と BuildKit キャッシュを使った高速化
-- GitHub Actions から `ghcr.io/n4mlz/siv3d-docker-base` への公開
+- GitHub Actions から `ghcr.io/xlair-dev/siv3d-docker-base` への公開
 
 ### できること
 
@@ -30,7 +30,7 @@ docker buildx build -f docker/base/Dockerfile --load .
 
 #### 利用側テンプレート
 
-この base image を利用するテンプレートは、別リポジトリの `/home/noname/me/workspace/personal/siv3d-template` に分離しています。
+この base image を利用するテンプレートは、別リポジトリの [Siv3D-Template](https://github.com/xlair-dev/Siv3D-Template) に分離しています。
 
 ### 主な feature
 

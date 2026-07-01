@@ -258,7 +258,7 @@ Target shape:
 ```yaml
 services:
   siv3d-app:
-    image: ghcr.io/n4mlz/siv3d-docker-base:latest
+    image: ghcr.io/xlair-dev/siv3d-docker-base:latest
     container_name: siv3d-app
     user: user
     stdin_open: true
@@ -295,7 +295,7 @@ Create `.devcontainer/devcontainer.json` that points at the compose service inst
 }
 ```
 
-Use the same image path in compose and devcontainer so the devcontainer is just a developer wrapper around the published base image. The published image path is `ghcr.io/n4mlz/siv3d-docker-base:latest`.
+Use the same image path in compose and devcontainer so the devcontainer is just a developer wrapper around the published base image. The published image path is `ghcr.io/xlair-dev/siv3d-docker-base:latest`.
 
 - [ ] **Step 3: Document the container workflow**
 
@@ -347,7 +347,7 @@ jobs:
       - uses: docker/metadata-action@v5
         id: meta
         with:
-          images: ghcr.io/n4mlz/siv3d-docker-base
+          images: ghcr.io/xlair-dev/siv3d-docker-base
       - uses: docker/login-action@v3
         with:
           registry: ghcr.io
@@ -364,7 +364,7 @@ jobs:
           cache-to: type=gha,mode=max
 ```
 
-Tag the image as `latest` and the commit SHA so devcontainer and compose have a stable pull target and a reproducible fallback. The package name should be `ghcr.io/n4mlz/siv3d-docker-base`.
+Tag the image as `latest` and the commit SHA so devcontainer and compose have a stable pull target and a reproducible fallback. The package name should be `ghcr.io/xlair-dev/siv3d-docker-base`.
 
 - [ ] **Step 2: Keep the package name and image tag strategy documented**
 
