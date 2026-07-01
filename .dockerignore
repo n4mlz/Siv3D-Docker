@@ -1,0 +1,7 @@
+.git
+build
+**/build
+ExampleProject
+docs/superpowers/plans
+docs/superpowers/specs
+screenshot.png
