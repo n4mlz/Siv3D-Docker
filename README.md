@@ -1,64 +1,46 @@
-## Siv3D テンプレート
+## Siv3D Base Image
 
-このリポジトリは、再利用可能な base image を中心にした Linux 向け Siv3D テンプレートです。
+このリポジトリは、Siv3D 用の base image をビルドして GHCR に公開するためのものです。
+
+### 責務
+
+- Siv3D 本体のビルドとインストール
+- Linux 用の開発依存パッケージの管理
+- `ccache` と BuildKit キャッシュを使った高速化
+- GitHub Actions から `ghcr.io/n4mlz/siv3d-docker-base` への公開
 
 ### できること
 
-- ルート直下の CMake プロジェクトでゲームコードを置ける
-- `ghcr.io/n4mlz/siv3d-docker-base` に公開される Siv3D base image を使える
-- devcontainer で Siv3D の再ビルドなしにすぐ開発を始められる
-- `docker compose` でホストの GUI に接続して Linux 上で実行できる
-- `ccache` と build 用 volume で再ビルドを高速化できる
-- GitHub Actions から base image を自動公開できる
+- Siv3D を何度もローカルでビルドし直さずに済む
+- template 側の devcontainer / compose から共通 image を使える
+- マルチステージビルドで最終 image を小さく保てる
+- Linux GUI や開発依存を image 側に寄せられる
 
 ### 使い方
 
-#### 1. devcontainer で開く
-
-VS Code などで devcontainer を開くと、公開済みの base image をそのまま利用します。
-
-#### 2. compose で起動する
+#### ローカルで image をビルドする
 
 ```bash
-docker compose up -d
-docker compose exec siv3d-app bash
+docker buildx build -f docker/base/Dockerfile --load .
 ```
 
-#### 3. プロジェクトをビルドする
+#### GHCR に公開する
 
-コンテナ内またはローカルの Linux 環境で、リポジトリのルートからビルドします。
+`.github/workflows/publish-base-image.yml` が `main` への push や tag push で自動公開します。
 
-```bash
-cmake -S . -B build -GNinja -DCMAKE_BUILD_TYPE=Debug
-cmake --build build
-```
+#### 利用側テンプレート
 
-#### 4. 実行する
-
-```bash
-./build/Siv3DTemplate
-```
+この base image を利用するテンプレートは、別リポジトリの `/home/noname/me/workspace/personal/siv3d-template` に分離しています。
 
 ### 主な feature
 
-- **Siv3D base image の分離**: 重い Siv3D ビルドを `docker/base/Dockerfile` に集約
-- **高速な再ビルド**: `ccache` と named volume でゲーム側の再ビルドを短縮
-- **Linux GUI 対応**: X11 をホストにバイパスして描画可能
-- **devcontainer 対応**: そのまま開いて開発を始められる
-- **GitHub Actions 対応**: `main` への push などで GHCR に公開
-- **テンプレート向け構成**: `src/Main.cpp` だけを触ればゲームの起点になる
-
-### GitHub Actions
-
-`docker/base/Dockerfile` から base image をビルドし、`.github/workflows/publish-base-image.yml` から GHCR に公開します。
-
-`latest` と commit/tag ベースのタグを付けるので、devcontainer と compose の両方で安定して利用できます。
+- **Siv3D base image の集中管理**: heavy な build をこの repo に集約
+- **キャッシュ対応**: BuildKit cache と `ccache` を活用
+- **小さい最終 image**: multi-stage で build tree を持ち込まない
+- **GHCR 公開**: GitHub Actions で継続的に配布
 
 ### ファイル構成
 
-- `CMakeLists.txt`: ルートの CMake 定義
-- `src/Main.cpp`: グラフィカルな最小サンプル
-- `docker/base/Dockerfile`: Siv3D base image のビルド定義
-- `.devcontainer/devcontainer.json`: devcontainer 設定
-- `compose.yml`: ローカル実行用の compose 定義
-- `.github/workflows/publish-base-image.yml`: GHCR への公開 workflow
+- `docker/base/Dockerfile`: Siv3D base image の定義
+- `.github/workflows/publish-base-image.yml`: GHCR への publish workflow
+- `.dockerignore`: Docker build context の整理
