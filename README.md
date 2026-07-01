@@ -1,33 +1,24 @@
-## Siv3D on Docker
+## Siv3D Template
 
-![screenshot](screenshot.png)
+Minimal Linux-first Siv3D template at the repository root.
 
 ### Usage
 
-1. Set up example project directory
+1. Open the project in your Linux development environment or container.
+2. Configure from the repository root.
 
 ```bash
-$ ./setup.sh  # create ExampleProject/App
+cmake -S . -B build -GNinja -DCMAKE_BUILD_TYPE=Debug
 ```
 
-2. Build and run Docker container
+3. Build the template executable.
 
 ```bash
-$ docker compose build
-$ docker compose up -d
-$ docker compose exec siv3d-app bash
+cmake --build build
 ```
 
-4. Build and run the example project inside the container
+4. Run the graphical smoke test binary.
 
 ```bash
-$ pwd
-/home/user
-$ cd ExampleProject/App
-$ mkdir build
-$ cd build
-$ cmake -GNinja -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
-$ cd ..
-$ cmake --build build
-$ ./Siv3DTest
+./build/Siv3DTemplate
 ```
