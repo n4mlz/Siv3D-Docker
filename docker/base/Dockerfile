@@ -103,6 +103,7 @@ RUN groupadd -g "${GID}" "${USERNAME}" && \
     useradd -m -u "${UID}" -g "${GID}" -s /bin/bash "${USERNAME}"
 
 COPY --from=build /usr/local /usr/local
+COPY --from=build /tmp/OpenSiv3D/Linux/App/resources /usr/local/share/Siv3D/resources
 
 ENV CCACHE_DIR=/cache/ccache
 RUN mkdir -p /cache/ccache && chown -R "${USERNAME}:${USERNAME}" /cache
