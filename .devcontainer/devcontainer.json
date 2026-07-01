@@ -1,0 +1,11 @@
+{
+  "name": "Siv3D Template",
+  "dockerComposeFile": [
+    "../compose.yml"
+  ],
+  "service": "siv3d-app",
+  "workspaceFolder": "/workspace",
+  "remoteUser": "user",
+  "overrideCommand": false,
+  "shutdownAction": "stopCompose"
+}
